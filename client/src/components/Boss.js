@@ -6,24 +6,27 @@ class Boss extends Component {
     constructor() {
         super()
         this.state = {
-            boss: []
+            boss: data
         }
     }
 
     componentDidMount(){
         fetch("/scrape")
-            .then(res => res.json())
-            .then(data => this.setState({boss}))
+
+            .then(data => this.setState({data}))
+            console.log(data)
     }
     render() {
         return (
             <div className="App">
                 <ul>
                     {
-                        this.state.boss.map(boss =>
-                        <li key={boss[0]}>
-                            {boss[1]}
-                        </li>
+                        this.state.boss
+
+                            .map(boss =>
+                                <li>
+                                    {boss[1]} - {boss[7]}
+                                </li>
                         )
                     }
                 </ul>
