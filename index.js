@@ -17,7 +17,8 @@ function requestAsync(url) {
         request(url, function(err, res, body) {
             if (err) { return reject(err); }
             else {
-                var table = tabletojson.convertUrl(url,{forceIndexAsNumber:true})
+                var table;
+                tabletojson.convertUrl(url,{forceIndexAsNumber:true},(tableAsJson) => table = tableAsJson[3])
                 return resolve([res, body, table]);
             }
 
@@ -29,7 +30,11 @@ function requestAsync(url) {
         Promise.all(bossesURL.map(requestAsync))
             .then(function(allData) {
                 globalJson.push(allData)
-                console.log(globalJson.length)
+                console.log(fs.writeFile('client/src/output.json',JSON.stringify(globalJson,null,4)))
+
+            })
+            .catch((err) => {
+                console.log('Error:',err)
             });
     })
 
