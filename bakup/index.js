@@ -25,12 +25,7 @@ app.get('/scrape', function (req, res) {
                 stripHtmlFromCells: true,
             },
         )
-            .then((tablesAsJson) => {
-                fs.writeFile('client/src/output.json', JSON.stringify(tablesAsJson[3], null, 4), function (err) {
-
-                    console.log('File successfully written! - Check your project directory for the output.json file');
-
-                })
+            .then()
 
             })
 
